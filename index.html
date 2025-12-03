@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Blockchain Simulator - Versi dengan Nomor Block</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/style.css" />
+  </head>
+  <body>
+    <!-- Theme Toggle -->
+    <button id="theme-toggle" class="theme-toggle" title="Toggle Dark/Light Mode">
+      <span class="theme-icon"><i class="fas fa-moon"></i></span>
+    </button>
+
+    <!-- Background Pattern -->
+    <div class="bg-pattern"></div>
+
+    <!-- Navbar -->
+    <div class="navbar">
+      <div class="navbar-logo">
+        <span class="logo-text">BLOCKCHAIN LEARNING</span>
+      </div>
+      <div class="navbar-menu">
+        <button id="tab-home" class="active">Home</button>
+        <button id="tab-about">About Me</button>
+        <button id="tab-hash">Hash</button>
+        <button id="tab-block">Block</button>
+        <button id="tab-chain">Block Chain</button>
+        <button id="tab-ecc">ECC Signature</button>
+        <button id="tab-consensus">Konsensus</button>
+      </div>
+    </div>
+
+    <!-- Page: Home -->
+    <div id="page-home" class="page active">
+      <!-- Hero Section with Background Image -->
+      <div class="hero-section">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+          <div class="hero-text-main">
+            <h1>Selamat Datang di Website Pembelajaran Blockchain</h1>
+            <p class="hero-subtitle">Pelajari teknologi blockchain melalui simulasi interaktif yang mudah dipahami</p>
+            <div class="hero-badges">
+              <span class="badge">5 Simulation</span>
+              <span class="badge">Real SHA-256</span>
+              <span class="badge">Live Mining</span>
+            </div>
+          </div>
+          <div class="hero-image">
+            <img src="assets/images/blockchain-network.jpg" alt="Blockchain Network">
+          </div>
+        </div>
+      </div>
+
+      <!-- Main Content -->
+      <div class="home-content">
+        <div class="blockchain-intro">
+          <div class="intro-with-image">
+            <div class="intro-text">
+              <h3><i class="fas fa-search"></i> Apa Blockchain?</h3>
+              <p>Blockchain adalah teknologi <strong>distributed ledger</strong> yang mencatat transaksi secara aman, transparan, dan tidak dapat diubah. Setiap block berisi data, timestamp, dan hash kriptografi yang menghubungkannya dengan block sebelumnya, membentuk rantai (chain) yang secure.</p>
+              <ul class="intro-list">
+                <li>✓ Keamanan tingkat enterprise dengan SHA-256</li>
+                <li>✓ Tidak ada single point of failure</li>
+                <li>✓ Data immutable dan transparent</li>
+              </ul>
+            </div>
+            <div class="intro-image">
+              <img src="assets/images/blockchain-chain.jpg" alt="Blockchain Chain">
+            </div>
+          </div>
+        </div>
+        
+        <div class="features-highlight">
+          <div class="feature-item">
+            <span class="feature-emoji"><i class="fas fa-shield-alt"></i></span>
+            <strong>Secure</strong>
+            <p>SHA-256 Encryption</p>
+          </div>
+          <div class="feature-item">
+            <span class="feature-emoji"><i class="fas fa-network-wired"></i></span>
+            <strong>Decentralized</strong>
+            <p>No Single Point of Failure</p>
+          </div>
+          <div class="feature-item">
+            <span class="feature-emoji"><i class="fas fa-check-circle"></i></span>
+            <strong>Immutable</strong>
+            <p>Data Cannot Be Changed</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="datetime-info">
+        <div id="datetime" class="datetime-main"></div>
+        <div id="weather-info" class="weather-info-center">
+          <span class="loading"><i class="fas fa-spinner fa-spin"></i> Loading cuaca...</span>
+        </div>
+      </div>
+
+      <!-- Penjelasan Menu Bar -->
+      <div class="menu-guide-section">
+        <h2 class="section-title-about"><i class="fas fa-book-open"></i> Panduan Penggunaan Menu & Algoritma</h2>
+        
+        <div class="guide-grid">
+          <div class="guide-card" data-page="page-hash" style="cursor: pointer;">
+            <div class="guide-header">
+              <span class="guide-icon"><i class="fas fa-hashtag"></i></span>
+              <h3>Hash Generator</h3>
+            </div>
+            <p>Mengkonversi teks apapun menjadi hash SHA-256 yang unik. Hash adalah sidik jari digital yang digunakan untuk mengamankan data dalam blockchain.</p>
+            <button class="guide-btn">Coba Sekarang</button>
+          </div>
+
+          <div class="guide-card" data-page="page-block" style="cursor: pointer;">
+            <div class="guide-header">
+              <span class="guide-icon"><i class="fas fa-cube"></i></span>
+              <h3>Single Block</h3>
+            </div>
+            <p>Simulasi mining blockchain dengan Proof of Work. Temukan nonce yang menghasilkan hash dengan 4 angka nol di depan (0000xxxx).</p>
+            <button class="guide-btn">Coba Sekarang</button>
+          </div>
+
+          <div class="guide-card" data-page="page-chain" style="cursor: pointer;">
+            <div class="guide-header">
+              <span class="guide-icon"><i class="fas fa-cubes"></i></span>
+              <h3>Blockchain</h3>
+            </div>
+            <p>Lihat bagaimana multiple blocks saling terhubung membentuk chain yang immutable. Ubah satu block, semua block setelahnya menjadi invalid!</p>
+            <button class="guide-btn">Coba Sekarang</button>
+          </div>
+
+          <div class="guide-card" data-page="page-ecc" style="cursor: pointer;">
+            <div class="guide-header">
+              <span class="guide-icon"><i class="fas fa-key"></i></span>
+              <h3>ECC Signature</h3>
+            </div>
+            <p>Digital signature menggunakan Elliptic Curve Cryptography. Buktikan keaslian pesan tanpa mengungkapkan private key Anda.</p>
+            <button class="guide-btn">Coba Sekarang</button>
+          </div>
+
+          <div class="guide-card" data-page="page-consensus" style="cursor: pointer;">
+            <div class="guide-header">
+              <span class="guide-icon"><i class="fas fa-handshake"></i></span>
+              <h3>Konsensus</h3>
+            </div>
+            <p>Simulasi mekanisme konsensus blockchain dengan multiple users. Lihat bagaimana network mencapai kesepakatan (consensus) pada data yang valid.</p>
+            <button class="guide-btn">Coba Sekarang</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Page: About Me -->
+    <div id="page-about" class="page">
+      <div class="page-header">
+        <div class="header-icon"><i class="fas fa-user"></i></div>
+        <h2>About Me - Curriculum Vitae</h2>
+      </div>
+      <div class="about-container">
+        <div class="profile-section">
+          <div class="profile-photo">
+            <img src="assets/images/Foto_RAGIL.jpg" alt="Ragil Arya Kusuma" class="profile-img">
+            <p class="photo-hint">Ragil Arya Kusuma</p>
+          </div>
+          <div class="profile-info">
+            <h3 class="profile-name">Ragil Arya Kusuma</h3>
+            <p class="profile-title">Mahasiswa Teknologi Rekayasa Multimedia</p>
+            <div class="about-description">
+              <p>Mahasiswa semester 5 Program Studi Teknologi Rekayasa Multimedia di Politeknik Elektronika Negeri Surabaya. Memiliki minat dan
+kemampuan di bidang UI/UX Design dan Frontend Development dengan pengalaman dalam desain antarmuka, pembuatan website,
+serta produksi konten kreatif seperti fotografi, videografi, dan desain grafis. Siap berkontribusi secara profesional dalam lingkungan
+kerja yang kolaboratif dan inovatif.</p>
+              
+            </div>
+          </div>
+        </div>
+
+        <div class="cv-section">
+          <div class="cv-item">
+            <div class="cv-icon"><i class="fas fa-graduation-cap"></i></div>
+            <div class="cv-content">
+              <h3>Pendidikan</h3>
+              <div class="cv-entry">
+                <h4>Politeknik Elektronika Negeri Surabaya</h4>
+                <p class="cv-subtitle">Teknologi Rekayasa Multimedia - 2023 - Sekarang</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="cv-item">
+            <div class="cv-icon"><i class="fas fa-briefcase"></i></div>
+            <div class="cv-content">
+              <h3>Pengalaman Kerja & Magang</h3>
+              
+              <div class="cv-entry">
+                <h4>Freelance Video Editor</h4>
+                <p class="cv-subtitle">Self-Employed | 2023 - Sekarang</p>
+                <p class="cv-desc">Menangani lebih dari 50 project editing video untuk konten YouTube dan TikTok dari berbagai klien. Fokus pada storytelling visual, mengatur alur cerita yang engaging, dan mengoptimalkan konten sesuai brand identity untuk meningkatkan engagement dan reach di media sosial.</p>
+              </div>
+
+              <div class="cv-entry">
+                <h4>Marketing & Content Creator (Magang Mandiri)</h4>
+                <p class="cv-subtitle">PT Archimax Architect Indonesia, Surabaya | Desember 2024 - Januari 2025</p>
+                <p class="cv-desc">Bertanggung jawab dalam merancang dan memproduksi konten digital promosi untuk media sosial perusahaan arsitektur. Berkolaborasi dengan tim marketing untuk mengembangkan strategi visual branding yang efektif dan meningkatkan engagement media sosial melalui konten kreatif yang konsisten.</p>
+              </div>
+
+              <div class="cv-entry">
+                <h4>Photographer, Videographer & Graphic Designer (Magang)</h4>
+                <p class="cv-subtitle">Noic Photography, Kediri | Januari - Maret 2022</p>
+                <p class="cv-desc">Menangani pemotretan dan videografi untuk kebutuhan komersial serta dokumentasi acara. Melakukan editing foto dan video menggunakan Adobe Premiere Pro, After Effects, dan Lightroom, serta mendesain materi promosi digital dengan Adobe Photoshop dan Illustrator. Berhasil menyelesaikan 20+ project klien dengan tingkat kepuasan tinggi.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="cv-item">
+            <div class="cv-icon"><i class="fas fa-users"></i></div>
+            <div class="cv-content">
+              <h3>Organisasi & Kepanitiaan</h3>
+              
+              <div class="cv-entry">
+                <h4>Kepala Departemen Hubungan Antar Lembaga</h4>
+                <p class="cv-subtitle">Himpunan Mahasiswa Multimedia Broadcasting (HIMA MMB) PENS | 2025 - Sekarang</p>
+                <p class="cv-desc">Memimpin departemen dalam menjalin dan memelihara hubungan eksternal dengan organisasi mahasiswa lainnya. Mengkoordinir kegiatan kolaborasi antar lembaga, merencanakan program networking, dan melaksanakan strategi kerjasama untuk pengembangan organisasi dan peningkatan kapasitas anggota.</p>
+              </div>
+
+              <div class="cv-entry">
+                <h4>Staf Muda Departemen Hubungan Antar Lembaga</h4>
+                <p class="cv-subtitle">Himpunan Mahasiswa Multimedia Broadcasting (HIMA MMB) PENS | 2024</p>
+                <p class="cv-desc">Mendukung pelaksanaan kegiatan eksternal dan kerjasama dengan organisasi kemahasiswaan lainnya. Membantu koordinasi acara dan program kolaborasi antar lembaga sambil mempelajari manajemen organisasi dan komunikasi eksternal sebagai fondasi pengembangan kepemimpinan.</p>
+              </div>
+
+              <div class="cv-entry">
+                <h4>Anggota Aktif Ekstrakurikuler VIPHO (Video Photography)</h4>
+                <p class="cv-subtitle">SMKN 1 Tanjunganom | 2022</p>
+                <p class="cv-desc">Mengembangkan kemampuan fotografi dan videografi melalui berbagai project sekolah. Aktif berpartisipasi dalam dokumentasi kegiatan dan acara sekolah sambil mempelajari teknik dasar editing dan komposisi visual sebagai fondasi karir di bidang multimedia.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="cv-item">
+            <div class="cv-icon"><i class="fas fa-tools"></i></div>
+            <div class="cv-content">
+              <h3>Keahlian & Skills</h3>
+              <div class="skills-grid">
+                <span class="skill-tag">Video Editing</span>
+                <span class="skill-tag">Adobe Premiere Pro</span>
+                <span class="skill-tag">Adobe After Effects</span>
+                <span class="skill-tag">Adobe Photoshop</span>
+                <span class="skill-tag">Adobe Illustrator</span>
+                <span class="skill-tag">Photography</span>
+                <span class="skill-tag">Videography</span>
+                <span class="skill-tag">Content Creation</span>
+                <span class="skill-tag">Social Media Marketing</span>
+                <span class="skill-tag">Web Development</span>
+                <span class="skill-tag">Mobile Development</span>
+                <span class="skill-tag">Flutter</span>
+                <span class="skill-tag">Firebase</span>
+                <span class="skill-tag">JavaScript</span>
+                <span class="skill-tag">Python</span>
+                <span class="skill-tag">Blockchain</span>
+                <span class="skill-tag">Figma</span>
+                <span class="skill-tag">UI/UX Design</span>
+                <span class="skill-tag">Git & GitHub</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="cv-item">
+            <div class="cv-icon"><i class="fas fa-trophy"></i></div>
+            <div class="cv-content">
+              <h3>Sertifikasi & Penghargaan</h3>
+              
+              <div class="cv-entry">
+                <h4>LKMM TD (Latihan Keterampilan Manajemen Mahasiswa Tingkat Dasar)</h4>
+                <p class="cv-subtitle">Politeknik Elektronika Negeri Surabaya | 2024</p>
+                <p class="cv-desc">Pelatihan intensif dalam pengembangan soft skills, kepemimpinan, dan manajemen organisasi mahasiswa. Mempelajari konsep dasar kepemimpinan, team building, problem solving, dan komunikasi efektif untuk mendukung aktivitas organisasi kemahasiswaan.</p>
+              </div>
+
+              <div class="cv-entry">
+                <h4>Sertifikasi Kompetensi Keahlian Audio Video Processing</h4>
+                <p class="cv-subtitle">CV. Woko Chael & SMKN 1 Tanjunganom | 2023</p>
+                <p class="cv-desc">Sertifikasi kompetensi dalam bidang pengolahan audio dan video profesional. Mencakup teknik editing, mixing audio, color grading, dan post-production menggunakan software industry standard untuk menghasilkan konten multimedia berkualitas tinggi.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="cv-item">
+            <div class="cv-icon"><i class="fas fa-rocket"></i></div>
+            <div class="cv-content">
+              <h3>Personal Project</h3>
+              
+              <div class="cv-entry">
+                <h4>1. Blockchain Simulator</h4>
+                <p class="cv-subtitle">JavaScript, HTML, CSS | Workshop Teknologi Blockchain - 2025</p>
+                <p class="cv-desc">Simulasi blockchain interaktif dengan SHA-256 hashing, proof-of-work mining, chain validation, dan ECC digital signature. Menyediakan visualisasi real-time untuk memahami konsep blockchain, mining process, dan cryptographic security secara interaktif.</p>
+              </div>
+
+              <div class="cv-entry">
+                <h4>2. Mobile App E-Commerce Produk Handmade</h4>
+                <p class="cv-subtitle">Flutter, Firebase (Firestore, Authentication) | Mobile Development - 2025</p>
+                <p class="cv-desc">Aplikasi mobile e-commerce untuk produk handmade dengan fitur CRUD lengkap (Create, Read, Update, Delete). Terintegrasi dengan Firebase Firestore untuk database real-time dan Firebase Authentication untuk sistem login. Mengimplementasikan state management dan responsive design untuk pengalaman pengguna yang optimal di berbagai ukuran layar.</p>
+              </div>
+
+              <div class="cv-entry">
+                <h4>3. Website E-Commerce Produk Handmade</h4>
+                <p class="cv-subtitle">HTML, CSS, JavaScript, Bootstrap, Firebase (Firestore, Authentication) | Tugas Kuliah - 2024</p>
+                <p class="cv-desc">Platform e-commerce berbasis web dengan sistem autentikasi pengguna dan panel admin untuk manajemen produk. Terintegrasi dengan Firebase Firestore sebagai database dan Firebase Authentication untuk keamanan login. Dilengkapi fitur shopping cart, product management system, dan interface responsif menggunakan Bootstrap.</p>
+              </div>
+
+              <div class="cv-entry">
+                <h4>4. Wireframe Design UI/UX Portfolio Pribadi</h4>
+                <p class="cv-subtitle">Figma | UI/UX Design - 2024</p>
+                <p class="cv-desc">Mendesain antarmuka portfolio dengan pendekatan user-centered design. Fokus pada user experience, information architecture, dan visual hierarchy untuk menciptakan portfolio yang engaging dan mudah dinavigasi dengan flow yang intuitif.</p>
+              </div>
+
+              <div class="cv-entry">
+                <h4>5. Aplikasi Alarm Pintar</h4>
+                <p class="cv-subtitle">Python, Tkinter, ffplay | Ubuntu Linux - 2024</p>
+                <p class="cv-desc">Aplikasi alarm dengan GUI pada Linux yang memiliki fitur unik berupa soal matematika untuk menonaktifkan alarm. Dirancang untuk membantu pengguna bangun dengan lebih sadar dan fokus, mengintegrasikan audio playback dengan interface yang user-friendly.</p>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <!-- Lokasi & Kontak -->
+        <div class="location-contact-section">
+          <h2 class="section-title-about"><i class="fas fa-map-marker-alt"></i> Lokasi & Kontak</h2>
+          
+          <div class="location-contact-grid">
+            <!-- Lokasi Google Maps -->
+            <div class="location-card">
+              <h3><i class="fas fa-map-marker-alt"></i> Lokasi Kampus (PENS)</h3>
+              <div class="map-container">
+                <iframe 
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3957.7584649276157!2d112.79118257499606!3d-7.275824370845477!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dd7fa10ea2ae883%3A0xbe22c55d60ef09c7!2sPoliteknik%20Elektronika%20Negeri%20Surabaya!5e0!3m2!1sid!2sid!4v1733328000000!5m2!1sid!2sid" 
+                  width="100%" 
+                  height="350" 
+                  style="border:0; border-radius: 10px;" 
+                  allowfullscreen="" 
+                  loading="lazy" 
+                  referrerpolicy="no-referrer-when-downgrade">
+                </iframe>
+              </div>
+              <p class="location-address">
+                <strong>Alamat:</strong><br>
+                Jl. Raya ITS, Keputih, Kec. Sukolilo<br>
+                Kota Surabaya, Jawa Timur 60111<br>
+                Indonesia
+              </p>
+            </div>
+
+            <!-- Kontak Pesan -->
+            <div class="contact-card">
+              <h3><i class="fas fa-inbox"></i> Kontak Pesan</h3>
+              <p class="contact-intro">Punya pertanyaan atau feedback tentang website ini? Silakan hubungi saya melalui:</p>
+              
+              <div class="contact-methods">
+                <a href="mailto:aryakusumaragil@gmail.com" class="contact-method">
+                  <span class="method-icon"><i class="fas fa-envelope"></i></span>
+                  <div class="method-info">
+                    <strong>Email</strong>
+                    <p>aryakusumaragil@gmail.com</p>
+                  </div>
+                </a>
+
+                <a href="https://wa.me/6287757635035" target="_blank" class="contact-method">
+                  <span class="method-icon"><i class="fas fa-mobile-alt"></i></span>
+                  <div class="method-info">
+                    <strong>WhatsApp</strong>
+                    <p>+62 877-5763-5035</p>
+                  </div>
+                </a>
+
+                <a href="https://www.google.com/maps/place/Politeknik+Elektronika+Negeri+Surabaya/@-7.2758243,112.7911826,17z/data=!3m1!4b1!4m6!3m5!1s0x2dd7fa10ea2ae883:0xbe22c55d60ef09c7!8m2!3d-7.2758243!4d112.7937575!16s%2Fm%2F05h3fdq?entry=ttu&g_ep=EgoyMDI1MTEzMC4wIKXMDSoASAFQAw%3D%3D" target="_blank" class="contact-method">
+                  <span class="method-icon"><i class="fas fa-map-marker-alt"></i></span>
+                  <div class="method-info">
+                    <strong>Lokasi</strong>
+                    <p>Surabaya, Indonesia</p>
+                  </div>
+                </a>
+              </div>
+
+            
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Page: Hash -->
+    <div id="page-hash" class="page">
+      <div class="page-header">
+        <div class="header-icon"><i class="fas fa-hashtag"></i></div>
+        <h2>Hash Generator</h2>
+      </div>
+      
+      <div class="page-info-box">
+        <h3><i class="fas fa-bullseye"></i> Fungsi</h3>
+        <p>Mengkonversi text input menjadi hash SHA-256 yang unik dan fixed-length (64 karakter hexadecimal).</p>
+        
+        <h3><i class="fas fa-tools"></i> Cara Menggunakan</h3>
+        <p>Ketik teks apapun di textarea di bawah. Hash akan otomatis ter-generate secara real-time tanpa perlu klik tombol.</p>
+        
+        <h3><i class="fas fa-cogs"></i> Algoritma</h3>
+        <p>Menggunakan <strong>Web Crypto API</strong> dengan fungsi <code>crypto.subtle.digest('SHA-256', data)</code> untuk hashing kriptografi yang aman. Setiap perubahan sekecil apapun pada input akan menghasilkan hash yang completely berbeda (Avalanche Effect).</p>
+      </div>
+
+      <label for="hash-input">Text Input:</label>
+      <textarea id="hash-input" rows="4"></textarea>
+      <label>SHA-256 Hash:</label>
+      <div id="hash-output" class="output"></div>
+    </div>
+
+    <!-- Page: Single Block -->
+    <div id="page-block" class="page">
+      <div class="page-header">
+        <div class="header-icon"><i class="fas fa-cube"></i></div>
+        <h2>Single Block</h2>
+      </div>
+      
+      <div class="page-info-box">
+        <h3><i class="fas fa-bullseye"></i> Fungsi</h3>
+        <p>Simulasi mining satu block dengan <strong>Proof of Work</strong> untuk menemukan nonce yang menghasilkan hash valid.</p>
+        
+        <h3><i class="fas fa-tools"></i> Cara Menggunakan</h3>
+        <p>1. Input block number dan data<br>
+        2. Klik tombol "Mine Block"<br>
+        3. Sistem akan mencari nonce hingga hash dimulai dengan "0000"</p>
+        
+        <h3><i class="fas fa-cogs"></i> Algoritma</h3>
+        <p>Loop iteratif yang menggabungkan <code>block_number + data + nonce + timestamp</code>, lalu di-hash dengan SHA-256. Nonce increment (0, 1, 2, ...) sampai hash memenuhi difficulty (4 leading zeros). Rata-rata butuh 16^4 = 65,536 iterasi.</p>
+      </div>
+
+      <label for="block-number"># (Nomor Block):</label>
+      <input id="block-number" type="number" min="0" value="0" />
+
+      <label for="block-data">Data:</label>
+      <textarea id="block-data" rows="4"></textarea>
+
+      <label for="block-nonce">Nonce:</label>
+      <input id="block-nonce" type="text" maxlength="9" />
+
+      <label for="block-timestamp">Timestamp:</label>
+      <input id="block-timestamp" type="text" readonly />
+
+      <label>Hash:</label>
+      <div id="block-hash" class="output"></div>
+
+      <button id="btn-mine" class="mine">Mine</button>
+
+      <label for="speed-control">Kecepatan Mining:</label>
+      <select id="speed-control">
+        <option value="1">Normal</option>
+        <option value="10">10x Lebih Cepat</option>
+        <option value="50">50x Lebih Cepat</option>
+      </select>
+
+      <div id="mining-status" class="status"></div>
+    </div>
+
+    <!-- Page: Block Chain -->
+    <div id="page-chain" class="page">
+      <div class="page-header">
+        <div class="header-icon"><i class="fas fa-cubes"></i></div>
+        <h2>Blockchain</h2>
+      </div>
+      
+      <div class="page-info-box">
+        <h3><i class="fas fa-bullseye"></i> Fungsi</h3>
+        <p>Menampilkan chain lengkap dengan multiple blocks yang saling terhubung melalui previous hash.</p>
+        
+        <h3><i class="fas fa-tools"></i> Cara Menggunakan</h3>
+        <p>1. Mine setiap block secara berurutan<br>
+        2. Ubah data di salah satu block tengah<br>
+        3. Lihat block tersebut dan semua block setelahnya menjadi invalid (border merah)</p>
+        
+        <h3><i class="fas fa-cogs"></i> Algoritma</h3>
+        <p>Validasi chain dengan memeriksa: (1) Hash setiap block valid (dimulai 0000), (2) Previous hash cocok dengan hash block sebelumnya. Jika block[i] berubah, hash-nya berubah → previous_hash block[i+1] tidak match → chain broken. Ini membuktikan <strong>immutability blockchain</strong>.</p>
+      </div>
+
+      <div id="blockchain"></div>
+      <button id="btn-add-block">Add Block</button>
+    </div>
+
+    <!-- Page ECC Signature -->
+    <div id="page-ecc" class="page">
+      <div class="page-header">
+        <div class="header-icon"><i class="fas fa-key"></i></div>
+        <h2>Verifikasi ECC Digital Signature</h2>
+      </div>
+      
+      <div class="page-info-box">
+        <h3><i class="fas fa-bullseye"></i> Fungsi</h3>
+        <p>Mengimplementasikan digital signature menggunakan <strong>Elliptic Curve Cryptography</strong> untuk autentikasi.</p>
+        
+        <h3><i class="fas fa-tools"></i> Cara Menggunakan</h3>
+        <p>1. Klik "Generate Key Pair" untuk membuat private dan public key<br>
+        2. Ketik pesan, klik "Sign" untuk membuat signature<br>
+        3. Klik "Verify" untuk membuktikan signature valid</p>
+        
+        <h3><i class="fas fa-cogs"></i> Algoritma</h3>
+        <p>Menggunakan kurva <code>secp256k1</code> (sama dengan Bitcoin). Private key (256-bit random) → Public key (point pada kurva). <strong>Signing:</strong> hash message lalu enkripsi dengan private key. <strong>Verification:</strong> dekripsi signature dengan public key dan bandingkan hash.</p>
+      </div>
+
+      <button id="btn-generate-key">Generate Key Pair</button>
+      <p>Public Key dan Private Key dapat diedit untuk percobaan.</p>
+
+      <label>Public Key:</label>
+      <textarea id="ecc-public" rows="3"></textarea>
+
+      <label>Private Key:</label>
+      <textarea id="ecc-private" rows="3"></textarea>
+
+      <hr />
+      <label>Pesan yang akan ditandatangani:</label>
+      <textarea id="ecc-message" rows="3"></textarea>
+
+      <button id="btn-sign">Sign Message</button>
+      <label>Hasil Signature (Base64):</label>
+      <textarea id="ecc-signature" rows="3" readonly></textarea>
+
+      <hr />
+      <button id="btn-verify">Verify Signature</button>
+      <div id="ecc-verify-result" class="output"></div>
+    </div>
+
+    <!-- Konsensus Page -->
+    <div id="page-consensus" class="page">
+      <h2><i class="fas fa-balance-scale"></i> Simulasi Konsensus Blockchain</h2>
+      
+      <div class="page-info-box">
+        <h3><i class="fas fa-bullseye"></i> Fungsi</h3>
+        <p>Simulasi mekanisme konsensus blockchain dengan 3 user independen (A, B, C). Lihat bagaimana node mencapai kesepakatan tentang keadaan blockchain yang valid melalui majority vote.</p>
+        
+        <h3><i class="fas fa-tools"></i> Cara Menggunakan</h3>
+        <p>
+          <strong>1.</strong> Kirim transaksi dari user A/B/C (pilih penerima dan jumlah)<br>
+          <strong>2.</strong> Klik "Mine Semua Transaksi" untuk menambahkan ke blockchain masing-masing user<br>
+          <strong>3.</strong> Edit data di salah satu chain (simulasi corrupted node)<br>
+          <strong>4.</strong> Klik "Verify" untuk melihat block mana yang tidak valid (hash tidak cocok)<br>
+          <strong>5.</strong> Klik "Consensus" untuk sinkronisasi menggunakan majority vote
+        </p>
+        
+        <h3><i class="fas fa-cogs"></i> Algoritma</h3>
+        <p>
+          <strong>Majority Vote Consensus:</strong> Setiap posisi block dibandingkan across all chains. 
+          Data yang muncul paling sering (≥2 dari 3 user) diadopsi oleh semua user. 
+          Ini mensimulasi <code>Byzantine Fault Tolerance</code> di mana jaringan dapat bertahan dari node yang corrupted.
+          Mining menggunakan Proof of Work dengan difficulty <code>"000"</code> (3 leading zeros).
+        </p>
+      </div>
+
+      <div class="consensus-container">
+        <h3><i class="fas fa-users"></i> User Wallets</h3>
+        <div class="wallets">
+          <div class="wallet wallet-a">
+            <h4>User A</h4>
+            <p>Saldo: <span id="saldo-A">100</span> coins</p>
+            <label>Kirim ke:</label>
+            <select id="receiver-A">
+              <option value="B">User B</option>
+              <option value="C">User C</option>
+            </select>
+            <label>Jumlah:</label>
+            <input id="amount-A" type="number" min="1" value="10" />
+            <button id="send-A" class="btn-send">Kirim</button>
+          </div>
+
+          <div class="wallet wallet-b">
+            <h4>User B</h4>
+            <p>Saldo: <span id="saldo-B">100</span> coins</p>
+            <label>Kirim ke:</label>
+            <select id="receiver-B">
+              <option value="A">User A</option>
+              <option value="C">User C</option>
+            </select>
+            <label>Jumlah:</label>
+            <input id="amount-B" type="number" min="1" value="10" />
+            <button id="send-B" class="btn-send">Kirim</button>
+          </div>
+
+          <div class="wallet wallet-c">
+            <h4>User C</h4>
+            <p>Saldo: <span id="saldo-C">100</span> coins</p>
+            <label>Kirim ke:</label>
+            <select id="receiver-C">
+              <option value="A">User A</option>
+              <option value="B">User B</option>
+            </select>
+            <label>Jumlah:</label>
+            <input id="amount-C" type="number" min="1" value="10" />
+            <button id="send-C" class="btn-send">Kirim</button>
+          </div>
+        </div>
+
+        <h3><i class="fas fa-clipboard-list"></i> Mempool (Pending Transactions)</h3>
+        <textarea id="mempool" rows="4" placeholder="Format transaksi: A -> B : 10&#10;Contoh:&#10;A -> B : 15&#10;B -> C : 20&#10;C -> A : 5"></textarea>
+
+        <div class="consensus-controls">
+          <button id="btn-mine-all" class="btn-mine"><i class="fas fa-hammer"></i> Mine Semua Transaksi</button>
+          <button id="btn-verify-consensus" class="btn-verify"><i class="fas fa-check"></i> Verify Chains</button>
+          <button id="btn-consensus" class="btn-consensus"><i class="fas fa-balance-scale"></i> Run Consensus</button>
+        </div>
+
+        <h3><i class="fas fa-link"></i> Blockchain Chains</h3>
+        <div class="chains-container">
+          <div class="chain-section">
+            <h4>Chain User A</h4>
+            <div id="chain-A" class="chain-row"></div>
+          </div>
+          <div class="chain-section">
+            <h4>Chain User B</h4>
+            <div id="chain-B" class="chain-row"></div>
+          </div>
+          <div class="chain-section">
+            <h4>Chain User C</h4>
+            <div id="chain-C" class="chain-row"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="footer-content">
+        <div class="footer-section">
+          <h3>Blockchain Simulator</h3>
+          <p>Website simulasi blockchain interaktif untuk pembelajaran teknologi blockchain, cryptography, dan digital signature.</p>
+        </div>
+        
+        <div class="footer-section">
+          <h3>Quick Links</h3>
+          <ul class="footer-links">
+            <li><a href="#" onclick="showPage('page-home'); return false;">Home</a></li>
+            <li><a href="#" onclick="showPage('page-about'); return false;">About Me</a></li>
+            <li><a href="#" onclick="showPage('page-hash'); return false;">Hash Generator</a></li>
+            <li><a href="#" onclick="showPage('page-chain'); return false;">Blockchain</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-section">
+          <h3>Developed By</h3>
+          <div class="footer-logos">
+            <div class="footer-logo-item">
+              <img src="assets/images/Logo_TRM.png" alt="TRM Logo" class="footer-logo-img">
+              <p>Teknologi Rekayasa Multimedia</p>
+            </div>
+            <div class="footer-logo-item">
+              <img src="assets/images/Logo_PENS.png" alt="PENS Logo" class="footer-logo-img">
+              <p>Politeknik Elektronika Negeri Surabaya</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="footer-bottom">
+        <p>&copy; 2025 Ragil Arya Kusuma | Teknologi Rekayasa Multimedia - PENS</p>
+        <p>Workshop Teknologi Blockchain</p>
+      </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/elliptic/6.5.4/elliptic.min.js"></script>
+    <script src="assets/js/app.js"></script>
+  </body>
+</html>
+
